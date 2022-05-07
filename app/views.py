@@ -35,14 +35,14 @@ def about():
     
     return render_template('about.html')
 
-@app.route('/Register')
+@app.route('/register')
 def register():
     
     form= RegistrationForm()
     
     return render_template('register.html', title='Register', form=form)
 
-@app.route('/Login')
+@app.route('/login')
 def login():
     
     form= LoginForm()
