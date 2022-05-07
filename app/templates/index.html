@@ -7,6 +7,10 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Tests</h1>
+    {% for pitch in pitches %}
+        <h1>{{ pitch.title }}</h1>
+        <p>by: {{pitch.author}} on: {{pitch.date_posted}}</p>
+        <p>{{pitch.content}}</p>
+    {% endfor %}
 </body>
 </html>
