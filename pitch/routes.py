@@ -2,6 +2,7 @@ from flask import render_template, url_for, flash, redirect
 from pitch import app, db
 from pitch.forms import RegistrationForm, LoginForm
 from pitch.models import User, Pitch
+from flask_login import login_user
 
 
 
@@ -58,9 +59,10 @@ def login():
     
     form= LoginForm()
     if form.validate_on_submit():
-        if form.email.data == 'sirgama@protonmail.ch' and form.password.data == '1111':
-            flash(f'You have been logged in!', 'success')
+        user = User.query.filter_by(email=form.email.data).first()
+        password = User.query.filter_by(password=form.password.data).first()
+        if user and password:
+            login_user(user, remember=form.remember.data)
             return redirect(url_for('index'))
-        else:
-            flash('Login unsuccessful. Please check your username or password!', 'danger')
+        flash('Login unsuccessful. Please check your username or password!', 'danger')
     return render_template('login.html', title='Register', form=form)
