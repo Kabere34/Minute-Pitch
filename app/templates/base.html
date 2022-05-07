@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +16,9 @@
 </head>
 
 <body>
-
+    {% block navbar %}
+        {% include 'navbar.html' %}
+    {% endblock %}
 
 
     {% block content %}
