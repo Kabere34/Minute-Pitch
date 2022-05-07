@@ -1,7 +1,11 @@
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
 
 # Initializing application
 app = Flask(__name__)
+app.config['SECRET_KEY'] = '564648sjdhbfl654684adfa'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 
+db = SQLAlchemy(app)
 
 from app import views
