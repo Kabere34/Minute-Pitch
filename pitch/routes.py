@@ -1,7 +1,8 @@
 from flask import render_template, url_for, flash, redirect
-from pitch import app
+from pitch import app, db
 from pitch.forms import RegistrationForm, LoginForm
 from pitch.models import User, Pitch
+
 
 
 
@@ -44,8 +45,11 @@ def register():
     
     form= RegistrationForm()
     if form.validate_on_submit():
+        user = User(username=form.username.data, email=form.email.data, password=form.password.data)
+        db.session.add(user)
+        db.session.commit()
         flash(f'Account Created for {form.username.data}!', 'success')
-        return redirect(url_for('index'))
+        return redirect(url_for('login'))
     
     return render_template('register.html', title='Register', form=form)
 
