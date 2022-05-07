@@ -18,6 +18,16 @@
 </head>
 
 <body>
+    {% block navbar %}
+        {% include 'navbar.html' %}
+    {% endblock %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+               <div class="alert alert-{{ category }} text-center"> {{ message }}</div> 
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
     <div class="container d.flex align-items-center jusify-content-center" style="max-width: 30vw;">
     <form  method="POST" action="">
         {{ form.hidden_tag() }}
