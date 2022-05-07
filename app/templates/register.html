@@ -19,40 +19,37 @@
 
 <body>
     <div class="container">
-    <form style="width: 50vh;height:70vh;">
-        <!-- 2 column grid layout with text inputs for the first and last names -->
+    <form style="width: 50vh;height:70vh;" method="POST" action="">
+        {{ form.hidden_tag() }}
         <div class="row mb-4">
           <div class="col">
-            <div class="form-outline">
-              <input type="text" id="form3Example1" class="form-control" />
-              <label class="form-label" for="form3Example1">First name</label>
+            <fieldset class="form-group m-2">
+                <div class="form-outline m-4">
+                    {{form.username(class="form-control")}}
+                    {{form.username.label(class="form-label")}}
+                </div>
+                <div class="form-outline m-4">
+                    {{form.email(class="form-control")}}
+                    {{form.email.label(class="form-label")}}
+                </div>
+                <div class="form-outline m-4">
+                    {{form.password(class="form-control")}}
+                    {{form.password.label(class="form-label")}}
+                </div>
+                <div class="form-outline m-4">
+                    {{form.confirm_password(class="form-control")}}
+                    {{form.confirm_password.label(class="form-label")}}
+                </div>
+            </fieldset>
+            <div class="form-group m-4">
+                {{form.submit(class="btn btn-outline-primary")}}
+               
             </div>
           </div>
           
         </div>
       
-        <!-- Email input -->
-        <div class="form-outline mb-4">
-          <input type="email" id="form3Example3" class="form-control" />
-          <label class="form-label" for="form3Example3">Email address</label>
-        </div>
-      
-        <!-- Password input -->
-        <div class="form-outline mb-4">
-          <input type="password" id="form3Example4" class="form-control" />
-          <label class="form-label" for="form3Example4">Password</label>
-        </div>
-      
-        <!-- Checkbox -->
-        <div class="form-check d-flex justify-content-center mb-4">
-          <input class="form-check-input me-2" type="checkbox" value="" id="form2Example33" checked />
-          <label class="form-check-label" for="form2Example33">
-            Subscribe to our newsletter
-          </label>
-        </div>
-      
-        <!-- Submit button -->
-        <button type="submit" class="btn btn-primary btn-block mb-4">Sign up</button>
+        
       
         <!-- Register buttons -->
         <div class="text-center">
