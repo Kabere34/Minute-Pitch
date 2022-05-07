@@ -1,5 +1,6 @@
 from flask import render_template
 from app import app
+from .forms import RegistrationForm, LoginForm
 
 pitches = [
     {
@@ -33,3 +34,17 @@ def index():
 def about():
     
     return render_template('about.html')
+
+@app.route('/Register')
+def about():
+    
+    form= RegistrationForm()
+    
+    return render_template('register.html', title='Register', form=form)
+
+@app.route('/Login')
+def about():
+    
+    form= LoginForm()
+    
+    return render_template('login.html', title='Register', form=form)
