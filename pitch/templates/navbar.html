@@ -41,6 +41,9 @@
         <!-- Left links -->
         {% if current_user.is_authenticated %}
         <div class="d-flex align-items-center">
+          <a href="{{ url_for('account') }}"><button type="button" class="btn btn-link px-3 me-2">
+            Account
+          </button></a>
           <a href="{{ url_for('logout') }}"><button type="button" class="btn btn-secondary px-3 me-2">
             Logout
           </button></a>
