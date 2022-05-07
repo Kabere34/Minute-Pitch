@@ -9,3 +9,8 @@ def index():
     View root page function that returns the index page and its data
     '''
     return render_template('index.html')
+
+@app.route('/about')
+def about():
+    
+    return render_template('about.html')
