@@ -1,7 +1,5 @@
 from datetime import datetime
-from run import db
-
-
+from pitch import db
 
 
 
