@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="container d.flex align-items-center jusify-pitch-center">
+<div class="container d.flex align-items-center jusify-content-center">
     <form  method="POST" action="">
         {{ form.hidden_tag() }}
         <div class="row mb-4">
@@ -33,16 +33,16 @@
 
                 <div class="form-outline m-4">
                     
-                    {% if form.pitch.errors %}
-                    {{form.pitch(class="form-control is-invalid")}}
+                    {% if form.content.errors %}
+                    {{form.content(class="form-control is-invalid")}}
                     <div class="invalid-feedback">
-                        {% for error in form.pitch.errors %}
+                        {% for error in form.content.errors %}
                         <span>{{ error }}</span>
                         {% endfor %}
                     </div>
                     {% else %}
-                    {{form.pitch(class="form-control form-outline")}}
-                    {{form.pitch.label(class="form-label form-outline")}}
+                    {{form.content(class="form-control form-outline")}}
+                    {{form.content.label(class="form-label form-outline")}}
                     {% endif %}
                 </div>
               

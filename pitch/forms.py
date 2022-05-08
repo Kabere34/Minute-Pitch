@@ -57,5 +57,5 @@ class UpdateForm(FlaskForm):
 class PitchForm(FlaskForm):
     title = StringField('Pitch Title', validators=[DataRequired()])
     category = SelectField('Pitch Category', choices=[('Business','Business'),('Finance','Finance'),('Relationships','Relationships'),('Well-Being','Well-Being')],validators=[DataRequired()])
-    pitch = TextAreaField('Pitch Content', validators=[DataRequired()])
+    content = TextAreaField('Pitch Content', validators=[DataRequired()])
     submit = SubmitField('Post Pitch')

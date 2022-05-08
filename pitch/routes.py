@@ -1,5 +1,6 @@
 import os
 import secrets
+from unicodedata import category
 from flask import render_template, request, url_for, flash, redirect
 from pitch import app, db
 from pitch.forms import PitchForm, RegistrationForm, LoginForm, UpdateForm
@@ -10,24 +11,7 @@ from flask_login import login_user, current_user,login_required, logout_user
 
 
 
-pitches = [
-    {
-        'author': 'Gamaliel',
-        'title' : 'Igniting Interest',
-        'content' : 'sample cont 1',
-        'category' : 'business',
-        'date_posted': 'May 6th 2022'      
-      
-    },
-    {
-        'author': 'Gamaliel',
-        'title' : 'Igniting Interest',
-        'content' : 'sample cont 1',
-        'category' : 'business',
-        'date_posted': 'May 6th 2022'      
-    
-    }
-]
+
 
 # Views
 @app.route('/')
@@ -36,6 +20,7 @@ def index():
     '''
     View root page function that returns the index page and its data
     '''
+    pitches = Pitch.query.all()
     return render_template('index.html', pitches = pitches)
 
 @app.route('/about')
@@ -120,6 +105,9 @@ def new_pitch():
     form = PitchForm()
     
     if form.validate_on_submit():
+        pitch = Pitch(title=form.title.data, content=form.content.data,  author=current_user )
+        db.session.add(pitch)
+        db.session.commit()
         flash('Pitch Created Successfully!', 'success')
         return redirect(url_for('index'))
-    return render_template('new_pitch.html', title='New Pitch', form=form)
+    return render_template('create_pitch.html', title='New Pitch', form=form)
