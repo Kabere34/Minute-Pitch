@@ -8,21 +8,21 @@
     {% for pitch in pitches %}
     <div class="card mb-4 mt-2 ">
         <div class="card-header"> <img
-            src="https://mdbcdn.b-cdn.net/wp-content/uploads/2020/06/vertical.webp"
-            alt="Trendy Pants and Shoes"
+            src="{{ url_for('static', filename='profile_pics/' + pitch.author.image_file) }}"
+            alt="{{ pitch.author.username }}"
             class="img-fluid rounded-circle"
             style="max-height: 50px; width: 50px;"
             
-          />     {{ pitch.author }}</div>
+          />     {{ pitch.author.username }}</div>
         <div class="card-body">
           <h5 class="card-title">{{ pitch.title }}</h5>
           <p class="card-text">
             {{pitch.content}}.
           </p>
       
-          <button type="button" class="btn btn-primary">Button</button>
+          
         </div>
-        <div class="card-footer"><small class="text-muted">Last updated {{pitch.date_posted}}</small></div>
+        <div class="card-footer"><small class="text-muted">Posted on {{pitch.date_posted.strftime('%Y-%m-%d')}}    Category: {{ pitch.category }}</small></div>
       </div>
 
     {% endfor %}
@@ -30,7 +30,13 @@
 <div class="col-md-4">
     <h2>Top Users</h2>
     {% for pitch in pitches %}
-        <p>{{ pitch.author }}</p>
+    <div class="card-header"> <img
+      src="{{ url_for('static', filename='profile_pics/' + pitch.author.image_file) }}"
+      alt="{{ pitch.author.username }}"
+      class="img-fluid rounded-circle"
+      style="max-height: 50px; width: 50px;"
+      
+    />     {{ pitch.author.username }}</div>
     {% endfor %}
 </div>
 
