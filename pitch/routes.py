@@ -1,6 +1,6 @@
 from flask import render_template, url_for, flash, redirect
 from pitch import app, db
-from pitch.forms import RegistrationForm, LoginForm
+from pitch.forms import RegistrationForm, LoginForm, UpdateForm
 from pitch.models import User, Pitch
 from flask_login import login_user, current_user,login_required, logout_user 
 
@@ -82,5 +82,6 @@ def logout():
 
 @app.route('/account')
 def account():
+    form = UpdateForm()
     image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
-    return render_template('account.html', title='Account', image_file=image_file)
+    return render_template('account.html', title='Account', image_file=image_file, form=form)
