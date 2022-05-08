@@ -5,9 +5,10 @@
        <h2 class="text-center mt-2">Account Settings</h2><hr>
     <div class="card mb-3 m-5" style="max-width: 1000px;">
         <div class="row g-0">
+            <h5 class="text-center ">Profile <hr></h5>
           <div class="col-md-4 ml-2">
             <img
-              src="https://mdbcdn.b-cdn.net/wp-content/uploads/2020/06/vertical.webp"
+              src="{{ image_file }}"
               alt="Trendy Pants and Shoes"
               class="img-fluid rounded-circle m-3"
               style="height: 250px; width: 250px;"
@@ -15,9 +16,9 @@
           </div>
           <div class="col-md-8">
             <div class="card-body mt-5">
-              <h2 class="card-title">Hi, Gamaliel</h2>
+              <h2 class="card-title">Hi, {{current_user.username}}</h2>
               <h5 class="card-text">
-                Email: sirgama@proton.ch
+                Email: {{current_user.email}}
               </h5>
               <p class="card-text">
                 <small class="text-muted">Online</small>
