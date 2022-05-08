@@ -1,7 +1,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>{{current_user.username}}</h1>
-    <h3>Hello</h3>
+   <div class="container">
+    <div class="col-md-8">
+       <h3 class="text-center">Settings</h3>
+        <div class="card mb-4 mt-2 ">
+            <div class="card-header"> <img
+                src="https://mdbcdn.b-cdn.net/wp-content/uploads/2020/06/vertical.webp"
+                alt="Trendy Pants and Shoes"
+                class="img-fluid rounded-circle"
+                style="max-height: 200px; width: 200px;"
+                
+              />     </div>
+            <div class="card-body">
+              <h5 class="card-title">Hi, Gamaliel</h5>
+              <p class="card-text">
+                Email: sirgama@protonmail.ch
+              </p>
+   </div>
 
 {% endblock %}
