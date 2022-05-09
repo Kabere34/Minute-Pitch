@@ -20,15 +20,7 @@ def index():
     View root page function that returns the index page and its data
     '''
     
-    form = CommentForm()
-    
-    if form.validate_on_submit():
-        comment = Comment(content=form.content.data)
-        db.session.add(comment)
-        db.session.commit()
-        flash('Comment added!', 'success')
-        return redirect(url_for('index'))
-     
+   
     comments = Comment.query.all()
     pitches = Pitch.query.all()
     user = User.query.all()
@@ -38,7 +30,7 @@ def index():
     finance= Pitch.query.filter_by(category = 'Finance').all()
     relationships= Pitch.query.filter_by(category = 'Relationships').all()
     wellbeing = Pitch.query.filter_by(category = 'Well-Being').all()
-    return render_template('index.html', pitches = pitches,limit=limit,form=form, business=business, finance=finance, relationships=relationships, wellbeing=wellbeing, users=users, comments=comments)
+    return render_template('index.html', pitches = pitches,limit=limit, business=business, finance=finance, relationships=relationships, wellbeing=wellbeing, users=users, comments=comments)
 
 def new_func():
     comments = Comment.query.all()
@@ -177,8 +169,9 @@ def comment_pitch(pitch_id):
     form = CommentForm()
     
     if form.validate_on_submit():
-        comment = Comment(content=form.content.data)
-        db.session.add(comment)
+        comment = Comment(userdata=form.userdata.data)
+        pitch_id= Comment(pitch_id=pitch_id)
+        db.session.add(comment,pitch_id)
         db.session.commit()
         flash('Comment added!', 'success')
         return redirect(url_for('index'))

@@ -27,14 +27,14 @@ class Pitch(db.Model):
     category = db.Column(db.Text, nullable=False)
     content = db.Column(db.Text, nullable=False )
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    comments = db.relationship('Comment', backref='pitch', lazy=True)
+   
     
     def __repr__(self):
         return f"Pitch('{self.title}', '{self.date_posted}')"
     
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    content = db.Column(db.Text, nullable=False )
+    userdata = db.Column(db.Text, nullable=False )
     pitch_id = db.Column(db.Integer, db.ForeignKey('pitch.id'), nullable=True)
     
     
