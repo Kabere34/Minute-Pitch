@@ -5,7 +5,7 @@
     <div class="row">
 
 <div class="col-md-8">
-    {% for pitch in pitches %}
+    
     <div class="card mb-4 mt-2 ">
         <div class="card-header"> <img
             src="{{ url_for('static', filename='profile_pics/' + pitch.author.image_file) }}"
@@ -15,7 +15,7 @@
             
           />     {{ pitch.author.username }}</div>
         <div class="card-body">
-         <a href="{{ url_for('pitch', pitch_id=pitch.id) }}"><h5 class="card-title">{{ pitch.title }}</h5></a>
+          <h5 class="card-title">{{ pitch.title }}</h5>
           <p class="card-text">
             {{pitch.content}}.
           </p>
@@ -25,20 +25,9 @@
         <div class="card-footer"><small class="text-muted">Posted on {{pitch.date_posted.strftime('%Y-%m-%d')}}    Category: {{ pitch.category }}</small></div>
       </div>
 
-    {% endfor %}
+   
 </div>
-<div class="col-md-4">
-    <h2>Top Users</h2>
-    {% for pitch in pitches %}
-    <div class="card-header"> <img
-      src="{{ url_for('static', filename='profile_pics/' + pitch.author.image_file) }}"
-      alt="{{ pitch.author.username }}"
-      class="img-fluid rounded-circle"
-      style="max-height: 50px; width: 50px;"
-      
-    />     {{ pitch.author.username }}</div>
-    {% endfor %}
-</div>
+
 
     </div>
 </div>

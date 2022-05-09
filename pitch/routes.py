@@ -111,3 +111,10 @@ def new_pitch():
         flash('Pitch Created Successfully!', 'success')
         return redirect(url_for('index'))
     return render_template('create_pitch.html', title='New Pitch', form=form)
+
+@app.route('/pitch/<int:pitch_id>')
+@login_required
+def pitch(pitch_id):
+    pitch = Pitch.query.get_or_404(pitch_id)
+    return render_template('pitch.html', pitch=pitch)
+    
