@@ -1,10 +1,10 @@
 import unittest
 
-from app.models import User
+from pitch.models import User
 
 class UserTest(unittest.TestCase):
     def setUp(self):
-        self.new_user = User(username='lenus254',password='2580')
+        self.new_user = User(username='Sirgama',password='1111')
 
     def test_password_setter(self):
         self.assertTrue(self.new_user.password is not None)
