@@ -13,22 +13,22 @@ from flask_login import login_user, current_user,login_required, logout_user
 
 
 # Views
-@app.route('/')
+@app.route('/', methods=['GET','POST'])
 def index():
 
     '''
     View root page function that returns the index page and its data
     '''
+    
     form = CommentForm()
     
     if form.validate_on_submit():
-        comment = Comment(comment=form.comment.data)
+        comment = Comment(content=form.content.data)
         db.session.add(comment)
         db.session.commit()
         flash('Comment added!', 'success')
         return redirect(url_for('index'))
-    
-    
+     
     comments = Comment.query.all()
     pitches = Pitch.query.all()
     user = User.query.all()
@@ -169,3 +169,17 @@ def delete_pitch(pitch_id):
     db.session.commit()
     flash('Pitch Deleted', 'success')
     return redirect(url_for('index'))
+
+@app.route('/pitch/<int:pitch_id>/comment',methods=['GET', 'POST'])
+@login_required
+def comment_pitch(pitch_id):
+    
+    form = CommentForm()
+    
+    if form.validate_on_submit():
+        comment = Comment(content=form.content.data)
+        db.session.add(comment)
+        db.session.commit()
+        flash('Comment added!', 'success')
+        return redirect(url_for('index'))
+    return render_template('comment.html', title='New comment', form=form, legend='Add a comment')

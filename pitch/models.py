@@ -16,6 +16,7 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(60), nullable=False)
     pitches = db.relationship('Pitch', backref='author', lazy=True)
     
+    
     def __repr__(self):
         return f"User('{self.username}', '{self.email}', '{self.image_file}')"
     
@@ -26,16 +27,15 @@ class Pitch(db.Model):
     category = db.Column(db.Text, nullable=False)
     content = db.Column(db.Text, nullable=False )
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    comments = db.relationship('Comment', backref='pitch', lazy=True)
     
     def __repr__(self):
         return f"Pitch('{self.title}', '{self.date_posted}')"
     
 class Comment(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     content = db.Column(db.Text, nullable=False )
-    pitch_id = db.Column(db.Integer, db.ForeignKey('pitch.id'), nullable=False)
+    pitch_id = db.Column(db.Integer, db.ForeignKey('pitch.id'), nullable=True)
     
-    def __repr__(self):
-        return f"Pitch('{self.content}')"
     
    

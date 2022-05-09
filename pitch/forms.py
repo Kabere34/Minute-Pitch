@@ -62,5 +62,5 @@ class PitchForm(FlaskForm):
     
 class CommentForm(FlaskForm):
     
-    comment = TextAreaField('Comments...',validators=[DataRequired()])
+    content = TextAreaField('Comments...',validators=[DataRequired()])
     submit = SubmitField('Post')

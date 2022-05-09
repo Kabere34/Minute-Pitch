@@ -41,7 +41,7 @@
             class="img-fluid rounded-circle"
             style="max-height: 50px; width: 50px;"
             
-          />     {{ pitch.author.username }}</div>
+          />     {{ pitch.author.username }} <br> <small class="text-muted">Posted on {{pitch.date_posted.strftime('%Y-%m-%d')}}    Category: {{ pitch.category }}</small></div>
         <div class="card-body">
          <a href="{{ url_for('pitch', pitch_id=pitch.id) }}"><h5 class="card-title">{{ pitch.title }}</h5></a>
           <p class="card-text">
@@ -50,7 +50,16 @@
       
           
         </div>
-        <div class="card-footer"><small class="text-muted">Posted on {{pitch.date_posted.strftime('%Y-%m-%d')}}    Category: {{ pitch.category }}</small></div>
+        <div class="card-footer"><small class="text-muted">
+          <div class="row">
+            <div class="col" style="height: 10px; width:10px;"><i class="fa-solid fa-thumbs-up" ></i></div>
+            <div class="col"><i class="fa-solid fa-thumbs-down"></i></div>
+            <div class="col"><a href="{{ url_for('comment_pitch', pitch_id=pitch.id) }}" class="btn btn-info btn-rounded btn-sm"> Leave a Comment</a></div>
+          </div>
+
+          
+
+        </small></div>
       </div>
 
     {% endfor %}
