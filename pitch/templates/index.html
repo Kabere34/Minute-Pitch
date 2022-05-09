@@ -152,14 +152,14 @@
 </div>
 <div class="col-md-4">
   <h2>Top Users</h2>
-  {% for pitch in pitches %}
+  {% for user in users[:limit]: %}
   <div class="card-header"> <img
-    src="{{ url_for('static', filename='profile_pics/' + pitch.author.image_file) }}"
-    alt="{{ pitch.author.username }}"
+    src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}"
+    alt="{{ user.username }}"
     class="img-fluid rounded-circle"
     style="max-height: 50px; width: 50px;"
     
-  />     {{ pitch.author.username }}</div>
+  />     {{ user.username }}</div>
   {% endfor %}
 </div>
 </div>

@@ -1,10 +1,9 @@
 import os
 import secrets
-from unicodedata import category
 from flask import abort, render_template, request, url_for, flash, redirect
 from pitch import app, db
-from pitch.forms import PitchForm, RegistrationForm, LoginForm, UpdateForm
-from pitch.models import User, Pitch
+from pitch.forms import PitchForm, RegistrationForm, LoginForm, UpdateForm, CommentForm
+from pitch.models import User, Pitch, Comment
 from flask_login import login_user, current_user,login_required, logout_user 
 
 
@@ -20,13 +19,29 @@ def index():
     '''
     View root page function that returns the index page and its data
     '''
-    pitches = Pitch.query.all()
+    form = CommentForm()
     
+    if form.validate_on_submit():
+        comment = Comment(comment=form.comment.data)
+        db.session.add(comment)
+        db.session.commit()
+        flash('Comment added!', 'success')
+        return redirect(url_for('index'))
+    
+    
+    comments = Comment.query.all()
+    pitches = Pitch.query.all()
+    user = User.query.all()
+    users = list(reversed(user))
+    limit = 20
     business = Pitch.query.filter_by(category = 'Business').all()
     finance= Pitch.query.filter_by(category = 'Finance').all()
     relationships= Pitch.query.filter_by(category = 'Relationships').all()
     wellbeing = Pitch.query.filter_by(category = 'Well-Being').all()
-    return render_template('index.html', pitches = pitches, business=business, finance=finance, relationships=relationships, wellbeing=wellbeing)
+    return render_template('index.html', pitches = pitches,limit=limit,form=form, business=business, finance=finance, relationships=relationships, wellbeing=wellbeing, users=users, comments=comments)
+
+def new_func():
+    comments = Comment.query.all()
 
 @app.route('/about')
 def about():

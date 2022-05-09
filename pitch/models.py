@@ -29,3 +29,13 @@ class Pitch(db.Model):
     
     def __repr__(self):
         return f"Pitch('{self.title}', '{self.date_posted}')"
+    
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.Text, nullable=False )
+    pitch_id = db.Column(db.Integer, db.ForeignKey('pitch.id'), nullable=False)
+    
+    def __repr__(self):
+        return f"Pitch('{self.content}')"
+    
+   
