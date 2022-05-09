@@ -1,7 +1,6 @@
 import os
 import secrets
-from unicodedata import category
-from flask import render_template, request, url_for, flash, redirect
+from flask import abort, render_template, request, url_for, flash, redirect
 from pitch import app, db
 from pitch.forms import PitchForm, RegistrationForm, LoginForm, UpdateForm
 from pitch.models import User, Pitch
@@ -110,11 +109,31 @@ def new_pitch():
         db.session.commit()
         flash('Pitch Created Successfully!', 'success')
         return redirect(url_for('index'))
-    return render_template('create_pitch.html', title='New Pitch', form=form)
+    return render_template('create_pitch.html', title='New Pitch', form=form, legend='Update Post')
 
 @app.route('/pitch/<int:pitch_id>')
 @login_required
 def pitch(pitch_id):
     pitch = Pitch.query.get_or_404(pitch_id)
     return render_template('pitch.html', pitch=pitch)
+    
+    
+@app.route('/pitch/<int:pitch_id>/update',methods=['GET', 'POST'])
+@login_required
+def update_pitch(pitch_id):
+    pitch = Pitch.query.get_or_404(pitch_id)
+    if pitch.author != current_user:
+        abort(403)
+        
+    form = PitchForm()
+    if form.validate_on_submit():
+        pitch.title = form.title.data
+        pitch.content = form.content.data
+        db.session.commit()
+        flash('Pitch Updated', 'success')
+        return redirect(url_for('pitch', pitch_id=pitch.id))
+    elif request.method == "GET":
+        form.title.data = pitch.title
+        form.content.data = pitch.content
+    return render_template('create_pitch.html', form=form, legend='Update Post')
     
