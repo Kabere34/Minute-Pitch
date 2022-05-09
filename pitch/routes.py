@@ -1,5 +1,6 @@
 import os
 import secrets
+from unicodedata import category
 from flask import abort, render_template, request, url_for, flash, redirect
 from pitch import app, db
 from pitch.forms import PitchForm, RegistrationForm, LoginForm, UpdateForm
@@ -20,7 +21,12 @@ def index():
     View root page function that returns the index page and its data
     '''
     pitches = Pitch.query.all()
-    return render_template('index.html', pitches = pitches)
+    
+    business = Pitch.query.filter_by(category = 'Business').all()
+    finance= Pitch.query.filter_by(category = 'Finance').all()
+    relationships= Pitch.query.filter_by(category = 'Relationships').all()
+    wellbeing = Pitch.query.filter_by(category = 'Well-Being').all()
+    return render_template('index.html', pitches = pitches, business=business, finance=finance, relationships=relationships, wellbeing=wellbeing)
 
 @app.route('/about')
 def about():
@@ -104,7 +110,7 @@ def new_pitch():
     form = PitchForm()
     
     if form.validate_on_submit():
-        pitch = Pitch(title=form.title.data, content=form.content.data,  author=current_user )
+        pitch = Pitch(title=form.title.data, category=form.category.data , content=form.content.data,  author=current_user )
         db.session.add(pitch)
         db.session.commit()
         flash('Pitch Created Successfully!', 'success')
