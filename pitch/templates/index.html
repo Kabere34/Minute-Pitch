@@ -4,7 +4,7 @@
 
 <div class="container ">
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-9">
   <!-- Tabs navs -->
 <ul class="nav nav-tabs mb-3 m-4 mt-5" id="ex-with-icons" role="tablist">
   <li class="nav-item" role="presentation">
@@ -21,11 +21,11 @@
   </li>
   <li class="nav-item" role="presentation">
     <a class="nav-link" id="ex-with-icons-tab-4" data-mdb-toggle="tab" href="#ex-with-icons-tabs-4" role="tab"
-      aria-controls="ex-with-icons-tabs-4" aria-selected="false"><i class="fas fa-heart fa-fw me-2"></i>Relatinships</a>
+      aria-controls="ex-with-icons-tabs-4" aria-selected="false"><i class="fas fa-heart fa-fw me-2"></i>Relationships</a>
   </li>
   <li class="nav-item" role="presentation">
     <a class="nav-link" id="ex-with-icons-tab-5" data-mdb-toggle="tab" href="#ex-with-icons-tabs-5" role="tab"
-      aria-controls="ex-with-icons-tabs-5" aria-selected="false"><i class="fas fa-cogs fa-fw me-2"></i>Well Being</a>
+      aria-controls="ex-with-icons-tabs-5" aria-selected="false"><i class="fas fa-cogs fa-fw me-2"></i>Well-Being</a>
   </li>
 </ul>
 <!-- Tabs navs -->
@@ -44,9 +44,9 @@
           />     {{ pitch.author.username }} <br> <small class="text-muted">Posted on {{pitch.date_posted.strftime('%Y-%m-%d')}}    Category: {{ pitch.category }}</small></div>
         <div class="card-body">
          <a href="{{ url_for('pitch', pitch_id=pitch.id) }}"><h5 class="card-title">{{ pitch.title }}</h5></a>
-          <p class="card-text">
+          <small class="card-text">
             {{pitch.content}}.
-          </p>
+          </small>
       
           
         </div>
@@ -200,16 +200,16 @@
 </div>
 <!-- Tabs content -->
 </div>
-<div class="col-md-4">
+<div class="col-md-3">
   <h4 class="text-center mt-5">Top Pitchers</h4><hr>
   {% for user in users[:limit]: %}
   <div class="card-header"> <img
     src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}"
     alt="{{ user.username }}"
     class="img-fluid rounded-circle"
-    style="max-height: 50px; width: 50px;"
+    style="max-height: 30px; width: 30px;"
     
-  />     {{ user.username }}</div>
+  />    <small> {{ user.username }}</small></div>
   {% endfor %}
 </div>
 </div>

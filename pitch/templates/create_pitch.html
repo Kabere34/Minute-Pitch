@@ -24,14 +24,14 @@
                     {% endif %}
                 </div>
 
-                <div class="form-outline m-4">
+                <div class="form-group m-4">
                    {{form.category.label(class="form-label")}}
                     {{form.category(class="form-control form-outline")}}
                     
                   
                 </div>
 
-                <div class="form-outline m-4">
+                <div class="form-group m-4">
                     
                     {% if form.content.errors %}
                     {{form.content(class="form-control is-invalid")}}
@@ -41,8 +41,9 @@
                         {% endfor %}
                     </div>
                     {% else %}
-                    {{form.content(class="form-control form-outline")}}
+                    
                     {{form.content.label(class="form-label form-outline")}}
+                    {{form.content(class="form-control form-outline")}}
                     {% endif %}
                 </div>
               

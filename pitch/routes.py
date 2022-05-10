@@ -123,7 +123,7 @@ def new_pitch():
         db.session.commit()
         flash('Pitch Created Successfully!', 'success')
         return redirect(url_for('index'))
-    return render_template('create_pitch.html', title='New Pitch', form=form, legend='Update Post')
+    return render_template('create_pitch.html', title='New Pitch', form=form, legend='New-Pitch')
 
 @app.route('/pitch/<int:pitch_id>')
 @login_required
