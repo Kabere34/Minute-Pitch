@@ -184,11 +184,12 @@ def send_reset_email(user):
     
     msg.body = f''' To Reset Your Password,visit the following link:
     
-{url_for('reset_token', token=token, _external=True)} 
+    { url_for('reset_token', token=token, _external=True) } 
     
-If you did not make this request, ignore this mail and no changes will be made
+    If you did not make this request, ignore this mail and no changes will be made
     
-'''
+    '''
+    mail.send(msg)
 
 
 @app.route("/reset_password", methods=['GET', 'POST'])
@@ -199,7 +200,7 @@ def reset_request():
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         send_reset_email(user)
-        flash('An Email has been sent with instructions on how to reset your password', 'info')
+        flash('An Email has been sent with instructions on how to reset your password. Check Your Spam as well', 'info')
     
     return render_template('reset_request.html', title='Request Password', form=form)
 
