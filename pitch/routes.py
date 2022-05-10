@@ -2,7 +2,7 @@ import os
 import secrets
 from flask import abort, render_template, request, url_for, flash, redirect
 from pitch import app, db
-from pitch.forms import PitchForm, RegistrationForm, LoginForm, UpdateForm, CommentForm
+from pitch.forms import PitchForm, RegistrationForm, LoginForm, UpdateForm, CommentForm, RequestResetForm, ResetPasswordForm
 from pitch.models import User, Pitch, Comment
 from flask_login import login_user, current_user,login_required, logout_user 
 
@@ -177,3 +177,11 @@ def comment_pitch(pitch_id):
         flash('Comment added!', 'success')
         return redirect(url_for('index'))
     return render_template('comment.html', title='New comment', form=form, legend='Add a comment')
+
+@app.route("/reset_password", methods=['GET', 'POST'])
+def reset_request():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    form = RequestResetForm()
+    
+    return render_template('reset_request.html', title='Request Password', form=form)
