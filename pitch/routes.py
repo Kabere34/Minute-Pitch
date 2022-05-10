@@ -1,11 +1,11 @@
 import os
 import secrets
 from flask import abort, render_template, request, url_for, flash, redirect
-from pitch import app, db
+from pitch import app, db, mail
 from pitch.forms import PitchForm, RegistrationForm, LoginForm, UpdateForm, CommentForm, RequestResetForm, ResetPasswordForm
 from pitch.models import User, Pitch, Comment
 from flask_login import login_user, current_user,login_required, logout_user 
-
+from flask_mail import Message
 
 
 
@@ -178,11 +178,28 @@ def comment_pitch(pitch_id):
         return redirect(url_for('index'))
     return render_template('comment.html', title='New comment', form=form, legend='Add a comment')
 
+def send_reset_email(user):
+    token = user.get_reset_token()
+    msg = Message('Password reset request', sender='gamalielsirengo@gmail.com', recipients=[user.email])
+    
+    msg.body = f''' To Reset Your Password,visit the following link:
+    
+{url_for('reset_token', token=token, _external=True)} 
+    
+If you did not make this request, ignore this mail and no changes will be made
+    
+'''
+
+
 @app.route("/reset_password", methods=['GET', 'POST'])
 def reset_request():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     form = RequestResetForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        send_reset_email(user)
+        flash('An Email has been sent with instructions on how to reset your password', 'info')
     
     return render_template('reset_request.html', title='Request Password', form=form)
 
@@ -197,6 +214,11 @@ def reset_token(token):
         return redirect(url_for('reset_request'))
     
     form = ResetPasswordForm()
+    if form.validate_on_submit():
+        password = form.password.data
+        db.session.commit()
+        flash('Password Reset Successfully, You can now login to access account features!', 'success')
+        return redirect(url_for('login'))
     
     return render_template('reset_token.html', title='Request Password', form=form)
 
