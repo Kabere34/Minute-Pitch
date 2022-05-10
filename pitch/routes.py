@@ -180,7 +180,7 @@ def comment_pitch(pitch_id):
 
 def send_reset_email(user):
     token = user.get_reset_token()
-    msg = Message('Password reset request', sender='gamalielsirengo@gmail.com', recipients=[user.email])
+    msg = Message('Password reset request', sender='minutepitcher@gmail.com', recipients=[user.email])
     
     msg.body = f''' To Reset Your Password,visit the following link:
     
