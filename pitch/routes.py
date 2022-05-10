@@ -30,6 +30,7 @@ def index():
     finance= Pitch.query.filter_by(category = 'Finance').all()
     relationships= Pitch.query.filter_by(category = 'Relationships').all()
     wellbeing = Pitch.query.filter_by(category = 'Well-Being').all()
+    
     return render_template('index.html', pitches = pitches,limit=limit, business=business, finance=finance, relationships=relationships, wellbeing=wellbeing, users=users, comments=comments)
 
 def new_func():

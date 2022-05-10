@@ -4,7 +4,7 @@
     <!-- Container wrapper -->
     <div class="container">
       <!-- Navbar brand -->
-      <a class="navbar-brand me-2" href="#">
+      <a class="navbar-brand me-2" href="{{ url_for('index') }}">
         <img
           src="{{ url_for('static', filename='images/logo2.png')}}"
           height="50"
@@ -34,24 +34,44 @@
           <li class="nav-item">
             <a class="nav-link" href="{{ url_for('index') }}">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('about') }}">About</a>
-          </li>
+          
         </ul>
         <!-- Left links -->
         {% if current_user.is_authenticated %}
-        <div class="d-flex align-items-center">
-          <a href="{{ url_for('new_pitch') }}"><button type="button" class="btn btn-link px-3 me-2">
-            New Pitch
-          </button></a>
-          <a href="{{ url_for('account') }}"><button type="button" class="btn btn-link px-3 me-2">
-            Account
-          </button></a>
-          <a href="{{ url_for('logout') }}"><button type="button" class="btn btn-secondary px-3 me-2">
-            Logout
-          </button></a>
-                   
+        <div class="dropdown">
+          <a
+            class="dropdown-toggle d-flex align-items-center hidden-arrow"
+            href="#"
+            id="navbarDropdownMenuAvatar"
+            role="button"
+            data-mdb-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <img
+              src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}"
+              class="rounded-circle"
+              height="25"
+              alt="{{current_user.username}}"
+              loading="lazy"
+            />{{current_user.username}}
+          </a>
+          <ul
+            class="dropdown-menu dropdown-menu-end"
+            aria-labelledby="navbarDropdownMenuAvatar"
+          >
+            <li>
+              <a class="dropdown-item" href="{{ url_for('new_pitch') }}">New Pitch</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="{{ url_for('account') }}">My Profile</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a>
+            </li>
+          </ul>
         </div>
+      </div>
+        
         {% else %}
   
         <div class="d-flex align-items-center">
