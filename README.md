@@ -16,8 +16,8 @@ You can view the site at: <https://sirgama-mp.herokuapp.com/>
 
 ## Setup Instructions and Installation
 
-- Clone this repository to a location in your file system. `git clone https://github.com/sirgama/Minute-Pitcher.git`
-- Open terminal command line then navigate to the root folder of the application. `cd MinutePitcher
+- Clone this repository to a location in your file system. `git clone https://github.com/sirgama/Minute-Pitch.git`
+- Open terminal command line then navigate to the root folder of the application. `cd Minute-Pitch
 - Run `./run.py`
 
 ### Technologies Used
